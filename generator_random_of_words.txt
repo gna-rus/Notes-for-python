@@ -1,0 +1,41 @@
+import random
+import secrets
+import string
+
+def generate_random_string_low(length):
+    letters = string.ascii_lowercase
+    rand_string = ''.join(random.choice(letters) for i in range(length))
+    print("Длина: ", length, " текст: ", rand_string)
+
+
+def generate_random_string_up(length):
+    letters = string.ascii_uppercase
+    rand_string = ''.join(random.choice(letters) for i in range(length))
+    print("Длина: ", length, " текст: ", rand_string)
+
+
+def generate_random_string_unik(length):
+    letters = string.ascii_lowercase
+    rand_string = ''.join(random.sample(letters, length))
+    print("Длина: ", length, " текст: ", rand_string)
+
+def generate_alphanum_random_string(length):
+    letters_and_digits = string.ascii_letters + string.digits
+    rand_string = ''.join(random.sample(letters_and_digits, length))
+    print("Длина: ", length, " текст: ", rand_string)
+
+
+def generate_alphanum_crypt_string(length):
+    letters_and_digits = string.ascii_letters + string.digits
+    crypt_rand_string = ''.join(secrets.choice(
+        letters_and_digits) for i in range(length))
+    print("Длина: ", length, " текст: ", crypt_rand_string)
+
+
+generate_alphanum_crypt_string(16)
+
+generate_random_string_low(10) # генератор случайной строки в нижнем регистре
+generate_random_string_up(10) # генератор случайной строки в верхнем регистре
+generate_random_string_unik(10) # генератор случайной строки из уникальных букв
+generate_alphanum_random_string(10) # генератор полностью случайной строки с буквами (оба регистра) и цифрами
+generate_alphanum_crypt_string(10) #  наобиолее оптимизированный генератор случайно строки через библиотеку secrets
