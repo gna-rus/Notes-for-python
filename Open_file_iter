@@ -1,0 +1,25 @@
+# Есть очень большой текстовый файл в формате csv с именем data.csv, 
+# содержащий данные посещения сайтов, которые нужно обработать.
+# Заголовок файла data.csv имеет вид:
+# user_id,user_name,user_ip,date,page_url
+#########
+import csv
+# Открываем файл data.csv для чтения:
+with open('data.csv', 'r', encoding='utf-8') as file:
+# Читаем каждую строку с помощью генераторного выражения
+    file_lines = (line for line in file)
+# Разбиваем строки файла через  разделитель , на список значений
+    line_values = (line.rstrip().split(',') for line in file_lines)
+# Извлекаем первую строку, которая является названием столбцов
+    file_headers = next(line_values)
+# Соединяем названия столбцов с соответствующими им значениями
+    line_dicts = (dict(zip(file_headers, data)) for data in line_values)
+# Фильтруем неподходящие строки и оставляем только те, в которых столбец page_url содержит текст stepik.org
+    result = (
+        line['user_name'], line['user_ip']
+        for line in line_dicts
+        if 'stepik.org' in line['page_url']
+        )
+# Обрабатываем интересующие значения
+    for index, (name, ip) in enumerate(set(result), 1):
+        print(f'{index}. {name} --- {ip}')
