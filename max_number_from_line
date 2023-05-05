@@ -1,0 +1,19 @@
+# код решает задачу по генерации самого большого числа используя значения списка listA
+from random import randint
+
+listA = [1, 2, 3, 4,9]
+list_rez = []
+len1 = len(listA)
+while len(list_rez) != (len1 * (len1 - 1)):
+    list1, list2 = [], []
+    list1 = listA.copy()
+    len_list1 = len(list1)
+    while len(list2) != len_list1:
+        id_rnd = randint(0, len(list1) - 1)
+        el = list1.pop(id_rnd)
+        list2.append(str(el))
+    str1 = int("".join(list2))
+    if str1 not in list_rez:
+        list_rez.append(str1)
+print(max(list_rez))
+print(list_rez)
