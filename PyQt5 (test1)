@@ -1,0 +1,34 @@
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QApplication, QMainWindow
+
+import sys
+def add_lab():
+    print("КЛИК", end = " ")
+
+def applic():
+    app = QApplication(sys.argv) # sys.argv - передаем параметры компьютера на котором происходит сборка
+                                 # QApplication - командна создания приложения
+    main_Win = QMainWindow() # создаем главное окно
+    main_Win.setWindowTitle("Главное окно") # создаем заголовок окна
+    main_Win.setGeometry(300,300,500,300) # передаем координаты окна и его размеры
+
+    main_label = QtWidgets.QLabel(main_Win) # создаем лейбл (в скобках "main_Win" - к какому окну будет относиться этот лейбл)
+    main_label.setText("Текст лейбла") # текст лейбла
+    main_label.move(50,50) # перемещение лейбла
+    main_label.setFixedWidth(200) # здаем фиксированный размер лейбла
+    # main_label.adjustSize() # подстраивает размер обьектра под его содержимое
+
+    main_text = QtWidgets.QPlainTextEdit(main_Win)  # создаю поле для ввода
+    main_text.move(50,100)
+
+    main_butt = QtWidgets.QPushButton(main_Win)  # Создаю кнопку
+    main_butt.move(50,150)
+    main_butt.setText("Нажми на меня!")
+    main_butt.adjustSize()
+    main_butt.clicked.connect(add_lab) # при нажатии на кнопку срабатывает функция add_lab
+
+    main_Win.show() # вывести окно на экран
+    sys.exit(app.exec_()) # команда для корректного выхода из программы
+
+if __name__ == "__main__": # строка запуска программы (код начинает с этой строки)
+    applic()
