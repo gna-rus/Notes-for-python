@@ -1,3 +1,4 @@
+# Код для таймера реализованный через декоратор
 import functools
 import time
 
