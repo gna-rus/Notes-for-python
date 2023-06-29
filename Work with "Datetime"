@@ -3,12 +3,14 @@ from datetime import date
 from datetime import timedelta
 
 data1 = "06.11.2021"
-dt = datetime.strptime(data1, "%d.%m.%Y") #dateTime
+dt = datetime.strptime(data1, "%d.%m.%Y") #dateTime from str
 print(dt)
-dt = datetime.strptime(data1, "%d.%m.%Y").toordinal() #int
+dt = datetime.strptime(data1, "%d.%m.%Y").toordinal() #int from Dt
 print(dt)
-str1 = date.fromordinal(dt).strftime('%d.%m.%Y') # str
+str1 = date.fromordinal(dt).strftime('%d.%m.%Y') # str from Int
 print(str1)
-dtStr1 = datetime.strptime(str1, '%d.%m.%Y') + timedelta(days=13) # DateTime
+dtStr1 = datetime.strptime(str1, '%d.%m.%Y') + timedelta(days=13) # DateTime from Str
 print(dtStr1)
 print(dtStr1.weekday())
+NewStrFromDt = dtStr1.strftime("%d.%m.%Y") # to Str from Dt
+print(NewStrFromDt)
