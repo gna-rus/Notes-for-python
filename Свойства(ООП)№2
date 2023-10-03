@@ -1,0 +1,21 @@
+class HourClock:
+    def __init__(self, hour):
+        if not isinstance(hour, int) or hour not in range(1, 12 + 1):
+            raise ValueError('Некорректное время')
+        self._hour = hour
+
+    def get_hours(self):
+        return self._hour
+
+    hours = property(get_hours, __init__)
+
+time = HourClock(7)
+
+print(time.hours)
+time.hours = 9
+print(time.hours)
+
+try:
+    time.hours = 15
+except ValueError as e:
+    print(e)
