@@ -7,7 +7,7 @@ class HourClock:
     def get_hours(self):
         return self._hour
 
-    hours = property(get_hours, __init__)
+    hours = property(get_hours, __init__)#геттер и сеттер
 
 time = HourClock(7)
 
