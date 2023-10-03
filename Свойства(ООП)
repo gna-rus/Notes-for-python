@@ -1,0 +1,20 @@
+class Rectangle:
+    def __init__(self, length, width ):
+        self.length = length
+        self.width = width
+
+    def get_perimeter(self):
+        return (self.length + self.width) * 2
+
+    def get_area(self):
+        return self.length * self.width
+
+    text = "Hi!!!" #просто атрибут к которому можно обратиться
+    perimeter = property(get_perimeter)#создаем свойство (переменная которая содержит в себе информацию о методе класса)
+    area = property(get_area)
+
+test = Rectangle(12,10)
+
+print(test.text)
+print(test.perimeter)#вызываем свойство, как обычный атрибут
+print(test.area)
