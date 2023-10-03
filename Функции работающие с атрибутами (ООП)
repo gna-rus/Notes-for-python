@@ -1,0 +1,20 @@
+class Cat: # создаю пустой класс
+    pass
+
+cat = Cat() #создаю обьект
+
+cat.name = 'Кемаль'
+
+print(getattr(cat, 'name')) # возвращаю значение атрибута который создан
+print(getattr(cat, 'age', 0)) # возвращаю значение атрибута которое НЕ создано
+
+setattr(cat, 'name', 'Роджер') # изменяю значение
+setattr(cat, 'age', 1)
+print(cat.age)
+print(cat.name)
+
+print(cat.__dict__) # вывожу на консоль все атрибуты и значения обьекта
+delattr(cat, 'name') # удаляю атрибут у обьета
+print(cat.__dict__)
+print(hasattr(cat, 'age')) # проверяет есть ли такой атрибут у обьекта
+print(hasattr(cat, 'name'))
