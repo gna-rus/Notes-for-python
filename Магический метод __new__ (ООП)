@@ -1,0 +1,8 @@
+class MyClass:
+    def __new__(cls, *args, **kwargs):
+        print(args, kwargs)
+        instance = object.__new__(cls)
+        return instance
+
+
+obj = MyClass(1, 2,33.3, "qwer", c=3, d=4)
