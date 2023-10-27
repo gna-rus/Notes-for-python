@@ -1,0 +1,23 @@
+# загрузи в PyCharm и проследи куда и как ведет super
+class A:
+    def smth(self):
+        print("class A")
+
+class B(A):
+    def smth(self):
+        print("class B")
+
+class C(B):
+    def smth(self):
+        print("class C")
+
+class D(C):
+    def smth(self):
+        super().smth()        # class C
+        super(D, self).smth() # class C
+        super(C, self).smth() # class B
+        super(B, self).smth() # class A
+        super(A, self).smth() # AttributeError
+
+d = D()
+d.smth()
