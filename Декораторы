@@ -1,0 +1,26 @@
+import functools
+
+def print_symbols(symbol, length): # сюда прилетают атрибуты из обьявления декоратора
+    def decorator(func): # сюда прилетает сама функция
+        @functools.wraps(func) # нужна для того чтобы функция не перетиралась (без нее __name__ и __doc__ могу работать не корректно)
+        def wrapper(*args, **kwargs): # сюда прилетают атрибуты функции которые задаются при инициализации
+            print(symbol * length)
+            return func(*args, **kwargs)
+        return wrapper
+    return decorator
+
+@print_symbols('*', 30)
+def add(a, b):
+    return a + b
+
+@print_symbols('-', 10)
+def mult(a, b):
+    return a * b
+
+@print_symbols('=', 40)
+def diff(a, b):
+    return a - b
+
+print(add(3, 9))
+print(mult(10, 20))
+print(diff(100, 1))
