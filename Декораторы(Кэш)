@@ -1,0 +1,21 @@
+# Метод кэширования результата функции, при повторном вызове функции с темеже значениями, функция не будет вычисляться а будет просто из кэша извлекаться
+
+from functools import cache # это модуль из коробки и он работает быстрее самописного кэша
+
+@cache
+def factorial(n: int) -> int:
+    print(f'Вычисляю факториал для числа {n}')
+    f = 1
+    for i in range(2, n + 1):
+        f *= i
+    return f
+
+print(f'{factorial(5) = }')
+print(f'{factorial(6) = }')
+print(f'{factorial(5) = }')
+print(f'{factorial(9) = }')
+print(f'{factorial(12) = }')
+print(f'{factorial(6) = }')
+print(f'{factorial(6) = }')
+print(f'{factorial(8) = }')
+print(f'{factorial(10) = }')
