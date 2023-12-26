@@ -1,0 +1,51 @@
+class Vector:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __str__(self):
+        return f"This class have X={self.x} Y={self.y}"
+
+    def __repr__(self):
+        return f'Vector({self.x}, {self.y})'
+
+    def __add__(self, other):
+        x = self.x + other.x
+        y = self.y + other.y
+        return Vector(x, y)
+
+    def __getattribute__(self, item):
+        if item == "z":
+            raise AttributeError("Неподходящий атрибут") #срабатывает ошибка и автоматически переходим в __getattr__
+        else:
+            return object.__getattribute__(self, item)
+
+    def __getattr__(self, item):
+        return f"Error!!!"
+
+    def __setattr__(self, key, value):
+        if key == "z":
+            print("Такаого атрибута нет. Вектор на плоскости на не в пространстве")
+        else:
+            return object.__setattr__(self, key, value)
+
+    def __delattr__(self, item):
+        if item in ["x", "y"]:
+            setattr(self, item, 0)
+        else:
+            object.__delattr__(self, item)
+
+a = Vector(2, 4)
+b = Vector(3, 11)
+c = a + b
+print(c) #__str__
+print(f"{c = }") # __repr__
+print(c.y) # __getattribute__
+print(c.z) # __getattribute__ -> __getattr__
+c.x = 321 #__setattr__
+print(c)
+c.z = 101 #__setattr__
+del c.x # __delattr__
+print(c)
+c.e = 1000
+print(c.e)
