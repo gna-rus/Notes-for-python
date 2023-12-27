@@ -1,0 +1,39 @@
+# Каждый раз, когда создается экземпляр Pet, то в результате получается случайный объект из другого класса. 
+# Такое возможно, т. к. нет ограничений на объект, который может возвращать .__new__(). 
+# Использование .__new__() таким образом превращает класс в гибкую и мощную фабрику объектов, 
+# не ограниченную экземплярами самого себя. 
+# Обратите внимание, что метод класса Pet.__init__() никогда не запускается. 
+# Это происходит потому, что Pet.__new__() всегда возвращает объекты другого класса, а не самого Pet.
+
+from random import choice
+
+class Pet:
+    def __new__(cls):
+        # выбираем класс случайным образом
+        other = choice([Dog, Cat, Bird])
+        # подставляем вместо собственного класса `cls` 
+        # случайно выбранный `other`
+        instance = super().__new__(other)
+        print(f"Я {type(instance).__name__}!")
+        return instance
+
+    def __init__(self):
+        print("Класс `Pet` никогда не запустится!")
+
+class Dog:
+    def communicate(self):
+        print("Гав! Гав!")
+
+class Cat:
+    def communicate(self):
+        print("Мяу! Мяу!")
+
+class Bird:
+    def communicate(self):
+        print("Чик! Чирик!")
+
+for i in range(1, 6):
+    print(i, end=" ")
+    pet1 = Pet()
+    pet1.communicate()
+    print()
