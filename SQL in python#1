@@ -1,0 +1,10 @@
+import sqlite3
+
+connection = sqlite3.connect('sqlite.db') # открываю или создаю базу данных
+cursor = connection.cursor()
+
+cursor.execute("""create table if not exists users(name,age);""") # вношу информацию в базу данных
+cursor.execute("""insert into users values ('Гвидо', 66);""")
+
+connection.commit() # закрываю базу данных
+connection.close()
