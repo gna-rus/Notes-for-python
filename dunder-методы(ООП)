@@ -1,7 +1,10 @@
+import datetime
 class Vector:
     def __init__(self, x, y):
         self.x = x
         self.y = y
+        self.archiv_list = []
+        self.iter_value = 0
 
     def __str__(self):
         return f"This class have X={self.x} Y={self.y}"
@@ -35,6 +38,21 @@ class Vector:
         else:
             object.__delattr__(self, item)
 
+    def __call__(self, value):
+        self.archiv_list.append(value)
+        return f"К архиву добавлено значение {value}"
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        while self.iter_value < self.y:
+            self.iter_value += self.x
+            if self.x <= self.iter_value < self.y:
+                return self.iter_value
+            raise StopIteration
+
+
 a = Vector(2, 4)
 b = Vector(3, 11)
 c = a + b
@@ -49,3 +67,13 @@ del c.x # __delattr__
 print(c)
 c.e = 1000
 print(c.e)
+
+c(111)    #__call__ (позволяет с классмо работать как с простой функцией)
+c("aaaa")
+print(c.archiv_list)
+
+iter_test = Vector(13,60) # __iter__ __next__ (без next метод iter не работает корректно)
+print(iter_test.__next__())
+for num in iter_test:
+    print(num)
+
