@@ -5,6 +5,7 @@
 class Cat:
     def __init__(self, name):
         self._name = name
+        self.age = 10
 
     @property
     def name(self):                  # первое свойство name, доступное только для чтения
@@ -22,5 +23,10 @@ class Cat:
 cat = Cat('Кемаль')
 
 print(cat.name)
-print(cat.set_name)
-print(cat.del_name)
+cat.set_name = "Барсик"
+print(cat.name)
+print(cat.__dir__())
+del cat.age
+print(cat.__dir__())
+cat.del_name
+print(cat.name)
