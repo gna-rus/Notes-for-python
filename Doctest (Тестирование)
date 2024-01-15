@@ -1,0 +1,30 @@
+def is_prime(p: int) -> bool:
+    """
+    Checks the number P for simplicity using finding the remainder of the division in the range [2, P).
+    Typos in text data should not be allowed (the way it is written below is the TRUTH)
+    >>> is_prime(42)
+    False
+    >>> is_prime(73)
+    True
+    """
+    for i in range(2, p):
+        if p % i == 0:
+            return False
+    return True
+
+def is_even(p: int) -> bool:
+    """
+    An even number or an odd number
+    >>> is_even(23)
+    False
+    >>> is_even(22)
+    True
+    """
+    if p % 2 == 0:
+        return True
+    return False
+
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod(verbose=True)
