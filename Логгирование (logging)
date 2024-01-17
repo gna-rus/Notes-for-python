@@ -2,6 +2,9 @@ import logging
 
 logging.basicConfig(level=logging.NOTSET)
 logger = logging.getLogger(__name__)
+# level=logging.NOTSET - определяет уровень логирования от которого будет выводиться информация. 
+# То есть если выставить level=logging.WARNING то будет выведена только logger.warning(), logger.error() и logger.critical,
+# при этом  logger.debug() и logger.info() - будет проигнорированы
 
 def log_all():
     logger.debug('Очень подробная отладочная информация. \nЗаменяем множество "принтов"')
