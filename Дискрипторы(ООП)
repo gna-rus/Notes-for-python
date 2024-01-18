@@ -1,0 +1,21 @@
+class MinValueDescriptor:
+    def __init__(self, min_value):
+        self.min_value = min_value
+
+    def __get__(self, instance, owner):
+        return instance._value
+
+    def __set__(self, instance, value):
+        if value < self.min_value:
+            raise ValueError(f"Value must be at least {self.min_value}")
+        instance._value = value
+
+
+class MyClass:
+    value = MinValueDescriptor(10)
+
+
+obj = MyClass()
+obj.value = 15  # Все в порядке, значение больше 10
+print(obj.value)  # Выведет 15
+obj.value = 5  # Вызовет ошибку ValueError, так как значение меньше 10
