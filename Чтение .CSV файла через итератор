@@ -1,0 +1,14 @@
+with open('data.csv', 'r', encoding='utf-8') as file: #Открываем файл data.csv для чтения
+    file_lines = (line for line in file) #Читаем каждую строку с помощью генераторного выражения
+    line_values = (line.rstrip().split(',') for line in file_lines) #Разбиваем строки файла через  разделитель , на список значений
+    file_headers = next(line_values) #Извлекаем первую строку, которая является названием столбцов
+    line_dicts = (dict(zip(file_headers, data)) for data in line_values) # Соединяем названия столбцов с соответствующими им значениями
+
+    result = (
+        (line['user_name'], line['user_ip'])
+        for line in line_dicts
+        if 'stepik.org' in line['page_url']
+        ) # Фильтруем неподходящие строки и оставляем только те, в которых столбец page_url содержит текст stepik.org
+
+    for index, (name, ip) in enumerate(set(result), 1): # Обрабатываем интересующие значения:
+        print(f'{index}. {name} --- {ip}'
