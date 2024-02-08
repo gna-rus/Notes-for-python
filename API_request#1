@@ -1,0 +1,54 @@
+import requests
+# Запросы API
+response_get = requests.get('https://api.github.com')
+response_post = requests.post('https://httpbin.org/post', data={'key':'value'}) # data={'key':'value'} - передаваемые данные по API
+response_put = requests.put('https://httpbin.org/put', data={'key':'value'})
+response_del = requests.delete('https://httpbin.org/delete')
+response_head = requests.head('https://httpbin.org/get')
+requests_patch = requests.patch('https://httpbin.org/patch', data={'key':'value'})
+requests_option = requests.options('https://httpbin.org/get')
+
+# Получение результата запроса
+response_get.content # байтовый ответ
+response_get.text # конвертирует ответ в строку, кодировку которой определится автоматически
+response_get.encoding = 'utf-8' # задать принудительно кодировку распознавания
+
+response_get.json() # получить ответ в формате json
+response_get.headers  # получить заголовки формата json
+
+# алгорит аутентификации по паролю
+from getpass import getpass
+requests.get(' https://api.github.com/user ', auth=('username', getpass()))
+
+# алгоритм аутентификации по токену
+import requests
+headers = {'X-Yandex-API-Key': 'b1fb281f-b5ff-4257-8b94-35f249384a32'}
+data = requests.get(' https://api.weather.yandex.ru/v1/forecast?lat=55.466&lon=36.93&extra=true', headers=headers)
+print (data.text)
+#####
+
+# Пример API запроса на 
+import requests
+S = requests.Session()
+
+def get_sites(lat, long, radius, limit=100):
+    URL = " https://en.wikipedia.org/w/api.php "
+    params = {
+    "action": "query",
+    "format": "json",
+    "list": "geosearch",
+    "gscoord": f"{lat}l{long}",
+    "gsradius": f"{radius}",
+    "gslimit": f"{limit}"
+    }
+    r = S.get(url=URL, params=params)
+    pages = r.json()["query"]["geosearch"]
+    sites = [i["title"] for i in pages]
+    return sites
+
+def test_step1():
+    assert "One Montgomery Tower" in get_sites("37.7891838", "-122.4033522", 100)
+
+
+
+
