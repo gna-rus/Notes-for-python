@@ -1,0 +1,29 @@
+import logging
+# если есть проблемы с кодировкой коментарев то нужна эта строчка (прямо так и записывается):
+# -*- coding: utf-8 -*-
+logging.basicConfig(level=logging.INFO, filename="py_log.log", filemode="w",
+                    format="%(asctime)s %(levelname)s %(message)s")
+# level=logging.INFO - от какого уровня и вышу будут показываться сообщения (соответствует 20 уровню)
+logging.debug("A DEBUG Message")  # 10 lvl
+logging.info("An INFO") # 20 lvl
+logging.warning("A WARNING") # 30 lvl
+logging.error("An ERROR") # 40 lvl
+logging.critical("A message of CRITICAL severity") # 50 lvl
+
+x_vals = [2, 3, 6, 4, 10,6]
+y_vals = [5, 7, 12, 0, 1,3]
+
+for x_val, y_val in zip(x_vals, y_vals):
+    x, y = x_val, y_val
+    logging.info(f"The values of x and y are {x} and {y}.")
+    try:
+        if y != 3:
+            z = x / y
+            logging.info(f"x/y successful with result: {z}.")
+        else:
+            logging.warning(f"y == 3")
+    except ZeroDivisionError as err:
+        logging.exception("Zero!")
+        logging.error("ALARM!!!!!!")
+
+
