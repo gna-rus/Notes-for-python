@@ -1,0 +1,10 @@
+Ctrl + Enter: Run the current cell
+Shift + Enter: Run the current cell and move to the next cell
+Alt + Enter: Run the current cell and insert a new cell below
+Ctrl + S: Save the notebook
+Ctrl + M A: Insert a new cell above the current cell
+Ctrl + M B: Insert a new cell below the current cell
+Ctrl + M D: Delete the current cell
+Ctrl + M M: Change the current cell to markdown mode
+Ctrl + M Y: Change the current cell to code mode
+Ctrl + /: Comment/uncomment the current line or selected lines
