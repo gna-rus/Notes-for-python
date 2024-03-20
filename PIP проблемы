@@ -1,0 +1,3 @@
+Если есть проблемы с загрузкой библиотек то может помочь команда:
+pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org -r libra.txt
+файл libra.txt должен содержать просто списко всех библиотек которые надо установить
