@@ -1,0 +1,51 @@
+# При помощи lxml
+
+Пример кода html
+<html lang="en">
+  <head>
+    <title>This is title of the page</title>
+  </head>
+  <body>
+    <p>Hello GeekBrains</p>
+    <ul>
+      <li id="myID">Data scraping course. </li>
+      <li class='myClass'>GeekBrain's link: ' \ ' <a href='https://gb.ru/geek_university/developer'>Developer</a>
+      </li>
+    </ul>
+  </body>
+</html>
+
+Обработка:
+from lxml import etree
+
+def print_tree(element, depth=0):
+    """Рекурсивная печать древовидной структуры элемента HTML"""
+    # Вывод текущего элемента с соответствующим отступом
+    print("-" * depth + element.tag)
+
+    # Рекурсивная печать дочерних элементов с увеличенным отступом
+    for child in element.iterchildren():
+        print_tree(child, depth + 1)
+
+# Парсинг HTML-документа
+tree = etree.parse("web_page.html") #указываю путь до файла
+
+# Получение корневого элемента дерева
+root = tree.getroot()
+
+# Вывод структуры дерева
+print_tree(root)
+
+# Найти текст по элементу структуры дерева
+title_element = tree.find("body/p")
+print(title_element.text)
+
+# Найти все текста по элементам структуры дерева
+title_element_list = tree.findall("body/ul/li")
+for el in title_element_list:
+
+    a = el.find('a') # Проверяю есть ли тег <a>, если есть то вывожу его в консоль
+    if a is not None:
+        print(f"{el.text.strip()}---{a.text}")
+    else:
+        print(el.text)
