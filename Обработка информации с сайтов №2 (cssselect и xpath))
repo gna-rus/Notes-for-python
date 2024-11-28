@@ -1,0 +1,24 @@
+# См. часть 1 предварительно
+# cssselect и xpath очень похожи по функционалу но xpath помощнее но и посложнее
+
+from lxml import etree
+import cssselect
+tree = etree.parse("web_page.html")
+
+html = tree.getroot()
+title_element = html.cssselect("li")
+print(title_element[0].text)
+
+# title_element = tree.cssselect("title")
+# print(title_element[0].text)
+
+
+tree = etree.parse("web_page.html")
+html = tree.getroot()
+list_items = html.cssselect("li")
+for li in list_items:
+    a = li.cssselect("a")
+    if len(a) == 0:
+        print(li.text)
+    else:
+        print(f"{li.text.strip()} {a[0].text}")
