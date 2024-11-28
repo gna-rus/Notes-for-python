@@ -1,0 +1,39 @@
+1. Установить MongoDB server
+2. Через консой зайти в директорию с утановленой программой
+3. Прописать путь куда сохраняться будут данные (команда <--dbpath>), например так:
+D:\MongoDB\bin>mongod.exe --dbpath D:\MongoDB\db
+4. Запустить MongoDB Compass
+5. Запускаешь Python
+
+____________________
+
+from pymongo import MongoClient
+import json
+import pprint
+
+client = MongoClient('localhost', 27017) # подсоединяюсь к локальному хосту
+
+db = client['hh_ru'] # создаю новый датафрейм
+work = db.work
+
+# Беру данные из файла json
+with open('box_office_data.json') as f:
+    templates = json.load(f)
+
+print(templates)
+
+# Передаю единичные данные в локальный сервер MongoDB
+work.insert_one(templates)
+
+# Добавить единичный данные
+test_dict = {'Уборщик':["Рога и копыта","Уровень дохода не указан", "Требуемый опыт работы: 3–6 лет"]}
+work.insert_one(test_dict)
+
+# Прочесть данные с локального хоста MongoDB
+for doc in work.find():
+    print(doc)
+
+# Поиск с фильтром
+print("____")
+for doc in work.find({"Уборщик": ["Рога и копыта", "Уровень дохода не указан", "Требуемый опыт работы: 3–6 лет"]}):
+    print(doc)
